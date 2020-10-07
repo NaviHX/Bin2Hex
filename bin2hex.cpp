@@ -94,6 +94,8 @@ void work()
     cin >> bnum;
     for (string::iterator i = bnum.begin(); i != bnum.end(); i++)
     {
+        if (*i == '#')
+            break;
         //当遇见'.'时切换输入栈至小数部分
         if (*i == '.')
         {
@@ -120,7 +122,7 @@ void work()
         }
         printHex(frac);
     }
-    cout<<'\n';
+    cout << '\n';
     //释放内存
     stackFree(inte);
     stackFree(frac);
@@ -130,7 +132,7 @@ void printHex(stack *s)
 {
     int temp[3];
     stack *ans = stackInit();
-    
+
     while (stackTop(s) != '\0')
     {
         //3位一取,不足补0
