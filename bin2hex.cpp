@@ -65,7 +65,7 @@ void stackPop(stack *s)
 {
     if (s->top == 0)
         return;
-    *(s->bot + s->top) = '\0';
+    *(s->bot + s->top - 1) = '\0';
     s->top--;
 }
 
