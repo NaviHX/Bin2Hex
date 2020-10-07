@@ -94,6 +94,7 @@ void work()
     cin >> bnum;
     for (string::iterator i = bnum.begin(); i != bnum.end(); i++)
     {
+        //当遇见'.'时切换输入栈至小数部分
         if (*i == '.')
         {
             fr = true;
@@ -108,6 +109,7 @@ void work()
     if (fr)
     {
         cout << '.';
+        //小数部分补0在最低位,让小数部分长度控制为3的倍数
         switch (frac->top % 3)
         {
         case 1:
@@ -119,6 +121,7 @@ void work()
         printHex(frac);
     }
     cout<<'\n';
+    //释放内存
     stackFree(inte);
     stackFree(frac);
 }
@@ -127,8 +130,10 @@ void printHex(stack *s)
 {
     int temp[3];
     stack *ans = stackInit();
+    
     while (stackTop(s) != '\0')
     {
+        //3位一取,不足补0
         for (int i = 0; i < 3; i++)
         {
             temp[i] = stackTop(s) == '\0' ? 0 : stackTop(s) - '0';
