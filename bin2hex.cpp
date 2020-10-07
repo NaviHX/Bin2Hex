@@ -114,6 +114,7 @@ void work()
             stackPush(frac, '0');
         case 2:
             stackPush(frac, '0');
+            break;
         }
         printHex(frac);
     }
