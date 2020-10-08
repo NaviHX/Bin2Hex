@@ -89,11 +89,12 @@ void work()
 {
     string bnum;
     stack *inte = stackInit(), *frac = stackInit();
-    bool fr;
+    bool fr;//是否有小数部分
     cout << "请输入二进制数:";
     cin >> bnum;
     for (string::iterator i = bnum.begin(); i != bnum.end(); i++)
     {
+        //当遇见'#'时直接退出输入
         if (*i == '#')
             break;
         //当遇见'.'时切换输入栈至小数部分
@@ -112,6 +113,7 @@ void work()
     {
         cout << '.';
         //小数部分补0在最低位,让小数部分长度控制为3的倍数
+        //利用switch特性
         switch (frac->top % 3)
         {
         case 1:
