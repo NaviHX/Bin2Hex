@@ -10,9 +10,9 @@ using namespace std;
 
 typedef struct Stack
 {
-    char *bot;
-    int top;
-    int size;
+    char *bot; //栈底
+    int top;   //栈顶
+    int size;  //栈大小
 
 } stack;
 
