@@ -89,42 +89,50 @@ void work()
 {
     string bnum;
     stack *inte = stackInit(), *frac = stackInit();
-    bool fr;//是否有小数部分
+    bool fr;           //是否有小数部分
+    bool legal = true; //合法输入标志
     cout << "请输入二进制数:";
     cin >> bnum;
-    for (string::iterator i = bnum.begin(); i != bnum.end(); i++)
+    for (string::iterator i = bnum.begin(); i != bnum.end() && legal; i++)
     {
         //当遇见'#'时直接退出输入
         if (*i == '#')
             break;
         //当遇见'.'时切换输入栈至小数部分
-        if (*i == '.')
+        else if (*i == '.')
         {
             fr = true;
             continue;
         }
+        else if (*i != '1' && *i != '0')
+            legal = false;
         if (fr)
             stackPush(frac, *i);
         else
             stackPush(inte, *i);
     }
-    printHex(inte);
-    if (fr)
+    if (legal)
     {
-        cout << '.';
-        //小数部分补0在最低位,让小数部分长度控制为3的倍数
-        //利用switch特性
-        switch (frac->top % 3)
+        printHex(inte);
+        if (fr)
         {
-        case 1:
-            stackPush(frac, '0');
-        case 2:
-            stackPush(frac, '0');
-            break;
+            cout << '.';
+            //小数部分补0在最低位,让小数部分长度控制为3的倍数
+            //利用switch特性
+            switch (frac->top % 3)
+            {
+            case 1:
+                stackPush(frac, '0');
+            case 2:
+                stackPush(frac, '0');
+                break;
+            }
+            printHex(frac);
         }
-        printHex(frac);
+        cout << '\n';
     }
-    cout << '\n';
+    else
+        printf("输入非法,请检查二进制序列是否合法\n");
     //释放内存
     stackFree(inte);
     stackFree(frac);
